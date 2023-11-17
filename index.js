@@ -1,10 +1,11 @@
+//had to dig deep on the internet to figure out why i kept having errors to find out i needed to use the code on line 2
 document.addEventListener('DOMContentLoaded', function() {
   const nameList = document.getElementById('name-list');
   const positionList = document.getElementById('position-list');
   const priceList = document.getElementById('price-list');
   const averageContainer = document.getElementById('average-price');
 
-  const peopleWithJobs = [
+  const freelancers = [
     { name: 'Alice', job: 'Engineer', price: 100 },
     { name: 'Bob', job: 'Designer', price: 150 },
     { name: 'Charlie', job: 'Developer', price: 120 },
@@ -21,17 +22,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
   let currentIndex = 0;
 
+// Couldn't get it to start with an entry
+
   const intervalId = setInterval(() => {
     updateListContent();
-  }, 1000);
+  }, 3000);
 
   setTimeout(() => {
     clearInterval(intervalId);
-  }, peopleWithJobs.length * 1000);
+  }, freelancers.length * 5000);
 
   function updateListContent() {
-    if (currentIndex < peopleWithJobs.length) {
-      const person = peopleWithJobs[currentIndex];
+    if (currentIndex < freelancers.length) {
+      const person = freelancers[currentIndex];
 
       const nameItem = document.createElement('li');
       nameItem.textContent = person.name;
@@ -55,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   function calculateAverage() {
-    const total = peopleWithJobs.slice(0, currentIndex).reduce((sum, person) => sum + person.price, 0);
+    const total = freelancers.slice(0, currentIndex).reduce((sum, person) => sum + person.price, 0);
     return total / currentIndex;
   }
 });
