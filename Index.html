@@ -3,12 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Freelancer Forum</title>
     <script src="index.js"></script>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <h1>Freelancer Forum</h1>
-    <h2> Current Average Price</h2>
-    <ul class="posts"></ul>
+
+    <div id="average-container"><span id="average-price">0</span></div>
+    <div id="lists-container">
+        <div class="list-container">
+          <h2>Name</h2>
+          <ul id="name-list"></ul>
+        </div>
+      
+        <div class="list-container">
+          <h2>Position</h2>
+          <ul id="position-list"></ul>
+        </div>
+      
+        <div class="list-container">
+          <h2>Price</h2>
+          <ul id="price-list"></ul>
+        </div>
+      </div>
 </body>
 </html>

@@ -1,71 +1,61 @@
-let freelancers = [
-    {
-      "name": "Alice",
-      "job": "Writer",
-      "price": 30,
-    },
-    {
-        "name": "Bob",
-        "job": "Teacher",
-        "price": 50,
-    },
-    {
-        "name": "Carol",
-        "job": "Programmer",
-        "price": 70,
-    },
-    {
-        "name": "Mandy",
-        "job": "Illustrator",
-        "price": 45,
-    },
-    {
-        "name": "Samuel",
-        "job": "Voice Actor",
-        "price": 35,
-    },
-    {
-        "name": "Margaret",
-        "job": "Engineer",
-        "price": 90,
-    },
+document.addEventListener('DOMContentLoaded', function() {
+  const nameList = document.getElementById('name-list');
+  const positionList = document.getElementById('position-list');
+  const priceList = document.getElementById('price-list');
+  const averageContainer = document.getElementById('average-price');
 
-  ]
+  const peopleWithJobs = [
+    { name: 'Alice', job: 'Engineer', price: 100 },
+    { name: 'Bob', job: 'Designer', price: 150 },
+    { name: 'Charlie', job: 'Developer', price: 120 },
+    { name: 'David', job: 'Manager', price: 200 },
+    { name: 'Eva', job: 'Artist', price: 130 },
+    { name: 'Frank', job: 'Analyst', price: 180 },
+    { name: 'Grace', job: 'Architect', price: 160 },
+    { name: 'Henry', job: 'Writer', price: 140 },
+    { name: 'Ivy', job: 'Scientist', price: 220 },
+    { name: 'Jack', job: 'Chef', price: 110 },
+    { name: 'Karen', job: 'Marketer', price: 190 },
+    { name: 'Leo', job: 'Doctor', price: 250 },
+  ];
 
-// `setInterval` will call `addShape` every 1000 milliseconds (1 second)
-// and return an interval ID that we can use to stop the interval later.
-// Calling `clearInterval(addShapeIntervalId)` will stop the interval.
-const addFreelancerIntervalId = setInterval(addFreelancer, 1000);
+  let currentIndex = 0;
 
-render(); // We call this function once to render the initial state
+  const intervalId = setInterval(() => {
+    updateListContent();
+  }, 1000);
 
-/**
- * Update the DOM to reflect the current state.
- * The term "render" is often used to describe this process.
- */
-function render() {
-  // Render the squares
-  const post = document.querySelector("#posts");
-  const postElements = freelancers.map((shape) => {
-    const element = document.createElement("li");
-    element.classList.add(freelancers.name, freelancers.job, freelancers.price);
-    return element;
-  });
-}
-  // TODO: Render the circles
-/**
- * Add a random shape to the `shapes` array
- */
-function addFreelancer() {
-  const color = colors[Math.floor(Math.random() * colors.length)];
-  const size = sizes[Math.floor(Math.random() * sizes.length)];
-  if (shapes.length >= maxShapes) {
-    clearInterval(addFreelancerIntervalId);
-  // TODO: Randomize the size of the shape
+  setTimeout(() => {
+    clearInterval(intervalId);
+  }, peopleWithJobs.length * 1000);
+
+  function updateListContent() {
+    if (currentIndex < peopleWithJobs.length) {
+      const person = peopleWithJobs[currentIndex];
+
+      const nameItem = document.createElement('li');
+      nameItem.textContent = person.name;
+      nameList.appendChild(nameItem);
+
+      const positionItem = document.createElement('li');
+      positionItem.textContent = person.job;
+      positionList.appendChild(positionItem);
+
+      const priceItem = document.createElement('li');
+      priceItem.textContent = `$${person.price}`;
+      priceList.appendChild(priceItem);
+
+      currentIndex++;
+    }
+
+    const averageItem = document.createElement('li');
+    averageItem.textContent = `Average Price: $${calculateAverage().toFixed(2)}`;
+    averageContainer.innerHTML = '';
+    averageContainer.appendChild(averageItem);
   }
-  shapes.push({ color, size });
-  
-  render();
 
-  // TODO: Stop adding shapes if we've reached the maximum number of shapes
-}
+  function calculateAverage() {
+    const total = peopleWithJobs.slice(0, currentIndex).reduce((sum, person) => sum + person.price, 0);
+    return total / currentIndex;
+  }
+});
